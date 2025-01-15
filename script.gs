@@ -562,13 +562,6 @@ function createAnalysisSheet() {
 
 
 // Create menu
-function onOpen() {
-  const ui = SpreadsheetApp.getUi();
-  ui.createMenu('Email Assistant with recruiters emails')
-    .addItem('Process Unread Emails', 'processUnreadEmails')
-    .addItem('Test With Recent Email', 'testWithRecentEmail')
-    .addToUi();
-}
 
 // Set up time-based trigger to run every hour
 function createTrigger() {
