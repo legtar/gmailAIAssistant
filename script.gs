@@ -51,7 +51,7 @@ function processUnreadEmails() {
 function processThread(thread) {
   // Get messages efficiently
   const messages = thread.getMessages();
-  if (messages.length === 0) return;
+  if (!messages || messages.length === 0) return;
   
   const message = messages[0];
   const emailAge = (new Date() - message.getDate()) / (1000 * 60 * 60 * 24);
@@ -310,8 +310,9 @@ function analyzeEmail(from, subject, body) {
     return JSON.parse(analysis);
   } catch (error) {
     Logger.log('Error analyzing email: ' + error);
-    return {
+    Logger.log('Returning default analysis due to error.');
       emailType: "other",
+    return {
       isRecruitingEmail: false,
       isFirstContact: false,
       isNewsletter: false,
@@ -458,6 +459,11 @@ function sendResponseWithResume(message, responseText) {
 }
 
 function processMessage(message) {
+  if (!from || !subject || !body) {
+    Logger.log('Invalid message details. Skipping processing.');
+    return;
+  }
+
   const from = message.getFrom();
   const subject = message.getSubject();
   const body = message.getPlainBody();
