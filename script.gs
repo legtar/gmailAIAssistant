@@ -51,7 +51,7 @@ function processUnreadEmails() {
 function processThread(thread) {
   // Get messages efficiently
   const messages = thread.getMessages();
-  if (messages.length === 0) return;
+  if (!messages || messages.length === 0) return;
   
   const message = messages[0];
   const emailAge = (new Date() - message.getDate()) / (1000 * 60 * 60 * 24);
