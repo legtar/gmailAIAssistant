@@ -458,6 +458,11 @@ function sendResponseWithResume(message, responseText) {
 }
 
 function processMessage(message) {
+  if (!from || !subject || !body) {
+    Logger.log('Invalid message details. Skipping processing.');
+    return;
+  }
+
   const from = message.getFrom();
   const subject = message.getSubject();
   const body = message.getPlainBody();
