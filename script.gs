@@ -310,8 +310,9 @@ function analyzeEmail(from, subject, body) {
     return JSON.parse(analysis);
   } catch (error) {
     Logger.log('Error analyzing email: ' + error);
-    return {
+    Logger.log('Returning default analysis due to error.');
       emailType: "other",
+    return {
       isRecruitingEmail: false,
       isFirstContact: false,
       isNewsletter: false,
